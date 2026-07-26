@@ -1,0 +1,31 @@
+fastapi==0.140.0
+uvicorn[standard]==0.51.0
+
+# Database
+sqlalchemy==2.0.51
+asyncpg==0.31.0
+alembic==1.18.5
+greenlet==3.5.4
+
+# Settings / validation
+pydantic==2.13.4
+pydantic-settings==2.14.2
+email-validator==2.3.0
+
+# Auth
+pyjwt==2.13.0
+pwdlib[argon2]==0.3.0
+
+# Redis (cache, rate limiting, background job queue)
+# pinned <6 because arq (job queue) requires redis[hiredis]<6
+redis==5.3.1
+arq==0.28.0
+
+# Payments
+stripe==15.3.1
+
+# Object storage (Cloudflare R2, S3-compatible API)
+boto3==1.43.56
+
+# Misc
+python-multipart==0.0.32
