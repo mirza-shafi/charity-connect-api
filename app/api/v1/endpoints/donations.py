@@ -193,7 +193,7 @@ async def confirm_basket(
                 add_invoice_items=add_invoice_items or None,
                 default_payment_method=payload.payment_method_id,
                 payment_behavior="default_incomplete",
-                expand=["latest_invoice"],
+                expand=["latest_invoice.confirmation_secret"],
                 metadata={"donation_ids": ",".join(str(i) for i in donation_ids)},
             )
         except stripe.CardError as exc:

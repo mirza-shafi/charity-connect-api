@@ -46,8 +46,17 @@ async def _handle_payment_intent_succeeded(db: AsyncSession, intent: dict) -> No
     await db.commit()
 
 
+def _invoice_subscription_id(invoice: dict) -> str | None:
+    # As of the "Basil" API version, Invoice.subscription no longer exists —
+    # the subscription reference moved to parent.subscription_details.subscription.
+    # See: https://docs.stripe.com/changelog/basil/2025-03-31/invoice-parent-property
+    parent = invoice.get("parent") or {}
+    subscription_details = parent.get("subscription_details") or {}
+    return subscription_details.get("subscription") or invoice.get("subscription")
+
+
 async def _handle_invoice_paid(db: AsyncSession, invoice: dict) -> None:
-    subscription_id = invoice.get("subscription")
+    subscription_id = _invoice_subscription_id(invoice)
     billing_reason = invoice.get("billing_reason")
     if not subscription_id or billing_reason not in ("subscription_create", "subscription_cycle"):
         return
