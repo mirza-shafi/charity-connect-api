@@ -22,7 +22,11 @@ redis==5.3.1
 arq==0.28.0
 
 # Payments
+# httpx is required for stripe's async (`*_async`) methods — not pulled in
+# transitively by anything else here, so it must be listed explicitly or a
+# clean install (e.g. Render's Docker build) silently lacks async HTTP support.
 stripe==15.3.1
+httpx==0.28.1
 
 # Object storage (Cloudflare R2, S3-compatible API)
 boto3==1.43.56
