@@ -193,7 +193,7 @@ async def confirm_basket(
                 add_invoice_items=add_invoice_items or None,
                 default_payment_method=payload.payment_method_id,
                 payment_behavior="default_incomplete",
-                expand=["latest_invoice.payment_intent"],
+                expand=["latest_invoice"],
                 metadata={"donation_ids": ",".join(str(i) for i in donation_ids)},
             )
         except stripe.CardError as exc:
@@ -213,7 +213,12 @@ async def confirm_basket(
                 d.stripe_subscription_id = sub.id
             await db.commit()
 
-            pi = sub.latest_invoice.payment_intent
+            # As of the "Basil" API version, Invoice.payment_intent no longer
+            # exists (invoices can have multiple partial payments now) — the
+            # PaymentIntent is reached via confirmation_secret.client_secret
+            # instead. See: https://docs.stripe.com/changelog/basil/2025-03-31/add-support-for-multiple-partial-payments-on-invoices
+            pi_id = sub.latest_invoice.confirmation_secret.client_secret.split("_secret_")[0]
+            pi = await stripe.PaymentIntent.retrieve_async(pi_id)
             if pi.status == "requires_confirmation":
                 try:
                     pi = await stripe.PaymentIntent.confirm_async(pi.id)
