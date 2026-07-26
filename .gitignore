@@ -6,3 +6,5 @@ build/
 coverage/
 .next/
 out/
+.vercel/
+*.log

@@ -1,0 +1,104 @@
+/* Design System & Theme Variables */
+:root {
+  /* Color Palette (Light Mode Default) */
+  --primary-h: 165;
+  --primary-s: 78%;
+  --primary-l: 28%;
+  --primary: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+  --primary-light: hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) + 10%));
+  --primary-dark: hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) - 8%));
+  --primary-alpha: hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.1);
+
+  --accent-h: 35;
+  --accent-s: 92%;
+  --accent-l: 50%;
+  --accent: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
+  --accent-hover: hsl(var(--accent-h), var(--accent-s), calc(var(--accent-l) - 8%));
+  --accent-alpha: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.15);
+
+  --bg-h: 210;
+  --bg-s: 20%;
+  --bg-l: 98%;
+  --bg: hsl(var(--bg-h), var(--bg-s), var(--bg-l));
+  
+  --card-bg: #ffffff;
+  --card-hover-bg: #fafbfc;
+  
+  --text-h: 217;
+  --text-s: 33%;
+  --text-l: 17%;
+  --text: hsl(var(--text-h), var(--text-s), var(--text-l));
+  --text-muted: hsl(var(--text-h), 15%, 45%);
+  --text-light: hsl(var(--text-h), 10%, 75%);
+
+  --border: hsl(var(--text-h), 20%, 90%);
+  --border-light: hsl(var(--text-h), 20%, 95%);
+  
+  --success: #10b981;
+  --success-alpha: rgba(16, 185, 129, 0.1);
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --danger-alpha: rgba(239, 68, 68, 0.1);
+  --info: #3b82f6;
+
+  /* Typography */
+  --font-display: 'Outfit', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+
+  /* Layout and Spacing */
+  --header-height: 80px;
+  --container-width: 1280px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 16px 36px rgba(15, 118, 110, 0.08);
+  --shadow-accent: 0 8px 24px hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.25);
+  
+  /* Glassmorphism Constants */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-blur: blur(12px);
+
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Mode Variables Override */
+body.dark-mode {
+  --bg-h: 222;
+  --bg-s: 47%;
+  --bg-l: 10%;
+  --bg: hsl(var(--bg-h), var(--bg-s), var(--bg-l));
+  
+  --card-bg: hsl(var(--bg-h), var(--bg-s), 14%);
+  --card-hover-bg: hsl(var(--bg-h), var(--bg-s), 16%);
+  
+  --text-h: 210;
+  --text-s: 40%;
+  --text-l: 96%;
+  --text: hsl(var(--text-h), var(--text-s), var(--text-l));
+  --text-muted: hsl(var(--text-h), 20%, 70%);
+  --text-light: hsl(var(--text-h), 15%, 45%);
+
+  --border: hsl(var(--bg-h), 30%, 20%);
+  --border-light: hsl(var(--bg-h), 30%, 16%);
+
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.5);
+  
+  --glass-bg: rgba(15, 23, 42, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+/* High Contrast/Accessibility Focus Styles */
+*:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
